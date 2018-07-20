@@ -43,6 +43,8 @@ function (ctx) {
     return res.text();
   }).then(function (result) {
     var data = JSON.parse(result);
+    console.log(data);
+
     if (!data.data.length) {
       var promise = new Promise(function (resolve, rejects) {
         ctx.reply('Can\'t find any gifs. Sorry \uD83D\uDE14');
