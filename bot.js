@@ -43,9 +43,8 @@ function (ctx) {
     return res.text();
   }).then(function (result) {
     var data = JSON.parse(result);
-    console.log(data);
 
-    if (!data.data.length) {
+    if (data.data instanceof Array && !data.data.length) {
       var promise = new Promise(function (resolve, rejects) {
         ctx.reply('Can\'t find any gifs. Sorry \uD83D\uDE14');
         resolve();
@@ -55,7 +54,7 @@ function (ctx) {
         return ctx.scene.reenter();
       });
     }
-    ctx.reply('Okay, I\'ll send you a ' + ctx.message.text + '\ndata.data.url');
+    ctx.reply('Okay, I\'ll send you a ' + ctx.message.text + '\n' + data.data.url);
     return ctx.scene.leave();
   }).catch(function (err) {
     ctx.reply('Some error occurs:\n<code>' + err + '</code>', { parse_mode: 'HTML' });
